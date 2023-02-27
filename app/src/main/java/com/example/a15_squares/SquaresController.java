@@ -14,12 +14,9 @@ public class SquaresController implements View.OnClickListener{
         this.model = view.getModel();
     }
 
+    // Logs every time a button is clicked
     public void onClick(View view){
         Log.d("button","button");
-        model.isButtonPressed = true;
-        this.view.isValid(view.getId()); // checks if button can be moved
-        this.view.testPrint();
-        view.invalidate();
     }
 
 }
