@@ -3,7 +3,7 @@
 // Main Class File:  MainActivity.java
 // File:             SquaresView.java
 // Semester:         CS 301 Spring 2023
-//
+// Date:             2/28/2023
 // Author:           Heidi Pham
 // Lecturer's Name:  Dr. Steven Libby
 //
