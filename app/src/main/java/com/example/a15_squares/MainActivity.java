@@ -1,3 +1,13 @@
+/******************************************************************************
+ //
+ // Main Class File:  MainActivity.java
+ // File:             MainActivity.java
+ // Semester:         CS 301 Spring 2023
+ //
+ // Author:           Heidi Pham
+ // Lecturer's Name:  Dr. Steven Libby
+ //
+ /******************************************************************************/
 package com.example.a15_squares;
 
 import androidx.appcompat.app.AlertDialog;
@@ -10,6 +20,10 @@ import android.view.View;
 import android.widget.Button;
 import java.util.Locale;
 
+/**
+ * A class that calls the Squares classes and builds the game
+ * @author <Heidi Pham>
+ */
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
 
-        // View and controller
+        // View, controller, and model instances
         SquaresView squaresView = findViewById(R.id.squares);
         SquaresController squaresController = new SquaresController(squaresView);
         SquaresModel squaresModel = squaresView.getModel();
@@ -53,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*********************************************************************************
+                 *    Title: <Making a button restart the activity>
+                 *    Author: <Ankitkumar Makwana>
+                 *    Date: <2014>
+                 *    Availability:
+                 *    <https://stackoverflow.com/questions/16116664/making-a-button-restart-the-activity>
+                 ********************************************************************************/
                 startActivity(new Intent(MainActivity.this, MainActivity.class));
             }
         });
@@ -65,6 +86,13 @@ public class MainActivity extends AppCompatActivity {
                     squaresView.isValid(view.getId()); // checks if button can be moved
                     squaresView.hasWon();
                     if (squaresModel.hasWon) { // if game has won
+                        /*************************************************************************
+                         *    Title: <Dialogs>
+                         *    Author: <NA>
+                         *    Date: <2023>
+                         *    Availability:
+                         *    <https://developer.android.com/develop/ui/views/components/dialogs>
+                         ************************************************************************/
                         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                         builder.setMessage("You Won!");
                         builder.setCancelable(true);

@@ -1,32 +1,46 @@
+/******************************************************************************
+//
+// Main Class File:  MainActivity.java
+// File:             SquaresView.java
+// Semester:         CS 301 Spring 2023
+//
+// Author:           Heidi Pham
+// Lecturer's Name:  Dr. Steven Libby
+//
+/******************************************************************************/
 package com.example.a15_squares;
-
-import static java.lang.Math.abs;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
-
-import androidx.appcompat.app.AlertDialog;
-
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Random;
 
+/**
+ * A class that constructs the view of the game and handles
+ * and creates the main methods
+ * @author <Heidi Pham>
+ */
 public class SquaresView extends TableLayout {
     // Instances
     private SquaresModel model = new SquaresModel();
     public int[][] squaresArray; // a 2D array that represents the squares
 
-    // SquaresView constructor
+    /**
+     * SquaresView constructor
+     * @param context - context, theme
+     * @param attrs - attributes
+     */
     public SquaresView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    // Randomizes a 1D array
-    public int[] randomizeNumbers() {
+    /**
+     * Randomizes a 1D array
+     * @return randomInts array
+     */
+    private int[] randomizeNumbers() {
         // Variables
         Random rand = new Random();
         int[] randomInts = new int[16];
@@ -36,6 +50,12 @@ public class SquaresView extends TableLayout {
             randomInts[i] = i + 1;
         }
 
+        /***************************************************************************************
+         *    Title: <How to shuffle an array in Java>
+         *    Author: <Pankaj>
+         *    Date: <2022>
+         *    Availability: <https://www.digitalocean.com/community/tutorials/shuffle-array-java>
+         ***************************************************************************************/
         // Randomly shuffles array of ints, leaves last element always 0
         for (int i = 0; i < randomInts.length - 1; i++) {
             int randomIndexToSwap = rand.nextInt(randomInts.length - 1);
@@ -46,8 +66,8 @@ public class SquaresView extends TableLayout {
         return randomInts;
     }
 
-    // 2D Array Representation of Board
-    public void squaresArray() {
+    /** 2D Array Representation of Board */
+    private void squaresArray() {
         // Variables
         int[] randIntArr = randomizeNumbers(); // randomized number 1D array
         int[][] squaresArray = new int[4][4]; // new 2D array
@@ -61,7 +81,10 @@ public class SquaresView extends TableLayout {
         this.squaresArray = squaresArray;
     }
 
-    // Array of buttons to be used
+    /**
+     * Method that returns an array of buttons to be used
+     * @return Button array
+     */
     public Button[] buttons() {
         // Buttons
         Button b1 = findViewById(R.id.b1);
@@ -87,7 +110,10 @@ public class SquaresView extends TableLayout {
         return buttons;
     }
 
-    // Method that moves the clicked button for a valid move
+    /**
+     * Method that moves the clicked button for a valid move
+     * @param id - id of clicked button
+     */
     public void isValid(int id) {
         // Variables
         Button clicked = findViewById(id);
@@ -177,7 +203,15 @@ public class SquaresView extends TableLayout {
         }
     }
 
-    // Checks if the clicked button can be moved
+    /**
+     * Helper method that checks if the clicked button can be moved
+     * @param i - row of clicked button
+     * @param j - col of clicked button
+     * @param ii - row of checked button
+     * @param jj - col of checked button
+     * @param one - clicked button
+     * @param two - checked button
+     */
     private void checkSpot(int i, int j, int ii, int jj, Button one, Button two) {
         // Checks between 2 elements if there is an empty spot
         if (squaresArray[ii][jj] == 0) {
@@ -195,7 +229,7 @@ public class SquaresView extends TableLayout {
         }
     }
 
-    // Sees if the game has been won
+    /** Method that sees if the game has been won */
     public void hasWon() {
         model.hasWon = squaresArray[0][0] == 1 && squaresArray[0][1] == 2 && squaresArray[0][2] == 3
                 && squaresArray[0][3] == 4 && squaresArray[1][0] == 5 && squaresArray[1][1] == 6
@@ -204,13 +238,13 @@ public class SquaresView extends TableLayout {
                 && squaresArray[3][0] == 13 && squaresArray[3][1] == 14 && squaresArray[3][2] == 15;
     }
 
+    /** Game is started */
     public void startGame () {
-        // Game is started
         squaresArray(); // makes a random array
         hasWon();
     }
 
-    // Model for SquaresModel
+    /** Model for SquaresModel */
     public SquaresModel getModel () {
         return model;
     }
